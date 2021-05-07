@@ -1,0 +1,71 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "name": "Single Page Application Refero",
+            "description": "L'équipe de Refero est venu nous voir pour mettre en place leur projet d'application web dans le domaine de l'immobilier B2B. Après compris le métier et travailler sur leurs processus, nous avons mis en oeuvre une SPA moderne permettant de gérer toutes les fonctionnalités de la plateforme refero.re. Et ce autant en zone admin pour la gestion et le workflow quoptidien de l'équipe de refero, qu'en zone publique pour l'utilisateur final",
+            "image": "refero-app.png",
+            "tags": [
+                "CONSULTANCY",
+                "UX",
+                "BACK"
+            ],
+            "technologies": [
+                "nodejs",
+                "emberjs",
+                "mongo"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Newtube website & Blog",
+            "description": "Cette année Triptyk a réalisé le nouveau site de Newtube, créateur de matériel en inox, entre-autre pour le milieu hospitalier. Il n’est pas commode de mettre en avant la conception de matériel en inox. Pas de visuel aux couleurs vives et bien que les créations soient d’une qualité et d’une finesse rigoureuse, il n’y a pas suffisamment de nouveau contenu pour faire vivre le site. Nous avons donc mis en place un nouveau site doté d’un blog, afin de faciliter le travail de la community manager Julie Moreau, de grands visuels et une composition avantageuse qui donne envie d’en savoir plus.",
+            "image": "newtube.png",
+            "tags": [
+                "CONSULTANCY",
+                "UX",
+                "BACK"
+            ],
+            "technologies": [
+                "php",
+                "wordpress",
+                "mysql"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Betv Grille des programmes électronique (EPG)",
+            "description": "Lorsque l'équipe de BeTV est venu vers nous pour mettre en place la meilleure solution pour leur EPG, nous n'avions aucunes d'idées à quel point ce projet allait amener des challenges technologiques et fonctionnels. Après avoir analyser leur longue liste de chaines, nous avons fait des recherches, des comparaisons et avons finalement proposé une solution In house qui permettait de gérer tous les besoins actuels et futurs. Le résultat est le fruit d'une collaboration très proche et efficace avec l'équipe interne du client",
+            "image": "be-tv-epg.png",
+            "tags": [
+                "CONSULTANCY",
+                "UX",
+                "FRONT"
+            ],
+            "technologies": [
+                "nodejs",
+                "emberjs",
+                "postgre",
+                ".net"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Les Cuisines Bruxelloises",
+            "description": "Les Cuisines Bruxelloises livrent les repas pour de milliers d’élèves à travers Bruxelles. La gestion des menus et de leurs annulations (maladie, congés, fermeture exceptionnelle, etc.) nécessitait un outil pratique et bien pensé afin que les écoles puissent administrer leurs commandes aisément. Triptyk a été sollicitée pour réaliser cet outil, une application multi-plate-forme rapide et efficace que tous les établissements devraient utiliser pour se faciliter la tâche.",
+            "image": "cuisines-bruxelloises.png",
+            "tags": [
+                "CONSULTANCY",
+                "UX",
+                "FRONT",
+                "BACK"
+            ],
+            "technologies": [
+                "tailwind",
+                "emberjs",
+                "mysql",
+                ".net"
+            ]
+        }
+    ]
+}
