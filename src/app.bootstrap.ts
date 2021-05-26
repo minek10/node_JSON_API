@@ -1,60 +1,55 @@
-import express, { urlencoded } from 'express';
-import { resolve, join } from 'path';
-import { router } from './app.router';
-import exphbs from 'express-handlebars';
-import { Helpers } from './views/helpers/Helpers';
-import morgan from 'morgan';
-import { createWriteStream } from 'fs';
-import session, { MemoryStore } from 'express-session';
-import flash from 'express-flash';
-import { config } from 'dotenv';
-import { DatabaseConnector } from './app.database';
-
-//setup env variables 
-config({path:'variables.env'});
-
-
-DatabaseConnector.initDatabase();
+import { json } from 'body-parser';
+import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import { ErrorMiddleware } from './middlewares/Errors';
+import { PassportConfig } from './middlewares/Passport';
+import { apiRouter } from './routes/api.router';
+import { apiAuthRouter } from './routes/auth.router';
+import { apiUsersRouter } from './routes/user.router';
+import { createConnection } from 'typeorm';
+import { Todo } from './models/Todo';
+import { User } from './models/User';
+import { Category } from './models/Category';
 
 const app = express();
 
-//loging with morgan
-app.use(morgan('combined', {
-    stream:createWriteStream(join(process.cwd(), '/private/logs/access.log'), {flags:'a'})
-}));
-//Static files
-app.use(express.static(`${process.cwd()}/public`));
+// app.use(helmet());
+app.use(cors());
+app.use(json());
 
-//Parse request
-app.use(urlencoded({extended:true}));
+//PASSPORT CONFIGURATION
+app.use(PassportConfig.configure);
+app.use(apiAuthRouter);
+app.use(apiRouter);
+app.use(apiUsersRouter);
+//ERROR
+//NotFOund
+app.use(ErrorMiddleware.notFound);
+//app error
+app.use(ErrorMiddleware.appError);
 
+async function initApp() {
+    try {
+        const connexion = await createConnection({
+            type:"mysql",
+            username: "root",
+            password : "test",
+            host:"localhost",
+            port: 3306,
+            database: "fullstack_example",
+            synchronize: true,
+            entities: [Todo, User, Category]
+        });
+        const result = await connexion.query("SHOW DATABASES;")
+        console.log("Connecté")
+        //console.log(result);
+    } catch(e){
+        console.log("Non connecté", e);
+    }
+}
 
-//Handlebars Templating
-app.set('views', resolve(process.cwd(), 'src', 'views'));
-const hbsConfig:ExphbsOptions = {extname:'.hbs'};
-const hbs = exphbs.create(hbsConfig);
-Helpers.registerHelpers(hbs);
-app.engine('hbs', hbs.engine);
-app.set('view engine', 'hbs');
+initApp();
 
+export {app};
 
-//Session Management
-const sessionStore: MemoryStore= new MemoryStore;
-app.use(session({
-    cookie:{maxAge:60000},
-    store:sessionStore,
-    saveUninitialized:true,
-    resave:true,
-    secret:'triptyk'
-}));
-
-//Flash Messages Management
-app.use(flash());
-
-//Specific routes
-app.use(router);
-
-app.listen(process.env.PORT, ()=>{
-    // eslint-disable-next-line no-console
-    console.log(`The server is running on port : ${process.env.PORT}`);
-});

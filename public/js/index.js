@@ -1,1 +1,0 @@
-console.log('init de la home');
