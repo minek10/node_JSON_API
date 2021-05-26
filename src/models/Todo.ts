@@ -1,5 +1,5 @@
 import { prop, Ref } from '@typegoose/typegoose';
-import { Column, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { BaseModel } from './Base';
 import { Category } from './Category';
 import { User } from './User';
@@ -13,6 +13,8 @@ import { User } from './User';
 //     @prop({ref:()=>User})
 //     public user?:Ref<User>;
 // }
+
+@Entity()
 
 class Todo extends BaseModel{
     @Column("varchar", {   

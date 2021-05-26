@@ -1,11 +1,13 @@
 import { prop } from '@typegoose/typegoose';
-import { Column, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 import { BaseModel } from './Base';
 import { Todo } from './Todo';
 // class Category{
 //     @prop({required:true, unique:true})
 //     public title?:string;
 // }
+
+@Entity()
 
 class Category extends BaseModel{
 
@@ -15,7 +17,7 @@ class Category extends BaseModel{
     })
     public title?:string;
 
-    @OneToMany( ()=> Todo, (todo) => todo.category)
+    @ManyToMany( ()=> Todo, (todo) => todo.category)
     public todos ?: Todo[];
 }
 
